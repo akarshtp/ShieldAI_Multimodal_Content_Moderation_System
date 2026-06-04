@@ -81,9 +81,7 @@ class TestAggregate:
         safe_image_result: ModerationResult,
     ) -> None:
         """Two safe results should combine into an APPROVED verdict."""
-        result = aggregator.aggregate(
-            text_result=mock_safe_result, image_result=safe_image_result
-        )
+        result = aggregator.aggregate(text_result=mock_safe_result, image_result=safe_image_result)
         assert result.final_verdict == ModerationVerdict.APPROVED
         assert result.text_result is not None
         assert result.image_result is not None
@@ -95,9 +93,7 @@ class TestAggregate:
         safe_image_result: ModerationResult,
     ) -> None:
         """Toxic text + safe image should produce a REJECTED verdict."""
-        result = aggregator.aggregate(
-            text_result=mock_toxic_result, image_result=safe_image_result
-        )
+        result = aggregator.aggregate(text_result=mock_toxic_result, image_result=safe_image_result)
         assert result.final_verdict == ModerationVerdict.REJECTED
 
     def test_aggregate_takes_max_confidence(
@@ -126,9 +122,7 @@ class TestAggregate:
             model_name="test",
         )
 
-        result = aggregator.aggregate(
-            text_result=text_result, image_result=image_result
-        )
+        result = aggregator.aggregate(text_result=text_result, image_result=image_result)
 
         # Build a lookup from the aggregated scores
         score_map = {s.category: s.confidence for s in result.final_scores}

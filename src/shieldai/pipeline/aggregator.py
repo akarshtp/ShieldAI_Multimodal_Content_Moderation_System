@@ -20,6 +20,7 @@ from shieldai.models import (
 
 if TYPE_CHECKING:
     from shieldai.config import ThresholdConfig
+
     pass
 
 logger = get_logger(__name__)
@@ -78,16 +79,12 @@ class ResultAggregator:
         start_ns = time.perf_counter_ns()
 
         if text_result is None and image_result is None:
-            raise ValueError(
-                "At least one of text_result or image_result must be provided."
-            )
+            raise ValueError("At least one of text_result or image_result must be provided.")
 
         # ----- compute combined scores -----
         if text_result is not None and image_result is not None:
             final_scores = self._merge_scores(text_result, image_result)
-            total_processing_ms = (
-                text_result.processing_time_ms + image_result.processing_time_ms
-            )
+            total_processing_ms = text_result.processing_time_ms + image_result.processing_time_ms
         elif text_result is not None:
             final_scores = list(text_result.scores)
             total_processing_ms = text_result.processing_time_ms
@@ -138,10 +135,7 @@ class ResultAggregator:
             existing = score_map.get(score.category, 0.0)
             score_map[score.category] = max(existing, score.confidence)
 
-        return [
-            CategoryScore(category=cat, confidence=conf)
-            for cat, conf in score_map.items()
-        ]
+        return [CategoryScore(category=cat, confidence=conf) for cat, conf in score_map.items()]
 
     def _determine_verdict(
         self,

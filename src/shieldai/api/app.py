@@ -98,8 +98,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         return {
             "verdict": result.verdict.value,
             "scores": [
-                {"category": s.category.value, "confidence": s.confidence}
-                for s in result.scores
+                {"category": s.category.value, "confidence": s.confidence} for s in result.scores
             ],
             "processing_time_ms": result.processing_time_ms,
             "model_name": result.model_name,

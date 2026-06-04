@@ -82,7 +82,7 @@ class TextPipeline:
         cleaned = _URL_RE.sub("", cleaned)
         cleaned = unicodedata.normalize("NFKD", cleaned)
         cleaned = _WHITESPACE_RE.sub(" ", cleaned).strip()
-        cleaned = cleaned[: _MAX_PREPROCESSED_LENGTH]
+        cleaned = cleaned[:_MAX_PREPROCESSED_LENGTH]
 
         logger.debug(
             "text_preprocessed",
@@ -108,10 +108,7 @@ class TextPipeline:
             validation ``error_message`` is an empty string.
         """
         if len(text) > _MAX_TEXT_LENGTH:
-            msg = (
-                f"Text exceeds maximum length of {_MAX_TEXT_LENGTH} characters "
-                f"(got {len(text)})"
-            )
+            msg = f"Text exceeds maximum length of {_MAX_TEXT_LENGTH} characters (got {len(text)})"
             logger.warning("text_validation_failed", reason="too_long", length=len(text))
             return False, msg
 
@@ -122,10 +119,7 @@ class TextPipeline:
             return False, "Text is empty after stripping whitespace"
 
         if len(stripped) < _MIN_TEXT_LENGTH:
-            msg = (
-                f"Text is too short (minimum {_MIN_TEXT_LENGTH} characters, "
-                f"got {len(stripped)})"
-            )
+            msg = f"Text is too short (minimum {_MIN_TEXT_LENGTH} characters, got {len(stripped)})"
             logger.warning(
                 "text_validation_failed",
                 reason="too_short",

@@ -23,14 +23,16 @@ _MIN_DIMENSION = 10
 _MAX_DIMENSION = 4096
 _MAX_RESIZE_SIDE = 1024
 
-_ALLOWED_FORMATS: frozenset[str] = frozenset({
-    "JPEG",
-    "PNG",
-    "GIF",
-    "BMP",
-    "WEBP",
-    "TIFF",
-})
+_ALLOWED_FORMATS: frozenset[str] = frozenset(
+    {
+        "JPEG",
+        "PNG",
+        "GIF",
+        "BMP",
+        "WEBP",
+        "TIFF",
+    }
+)
 
 
 class ImagePipeline:
@@ -123,9 +125,7 @@ class ImagePipeline:
             except (UnidentifiedImageError, Exception) as exc:
                 raise ValueError(f"Cannot open image from bytes: {exc}") from exc
 
-        raise TypeError(
-            f"Expected str or bytes for image source, got {type(source).__name__}"
-        )
+        raise TypeError(f"Expected str or bytes for image source, got {type(source).__name__}")
 
     # ── Validation ───────────────────────────────────────────────────────
 
@@ -163,8 +163,7 @@ class ImagePipeline:
         # Minimum dimensions
         if width < _MIN_DIMENSION or height < _MIN_DIMENSION:
             msg = (
-                f"Image too small ({width}x{height}); "
-                f"minimum is {_MIN_DIMENSION}x{_MIN_DIMENSION}"
+                f"Image too small ({width}x{height}); minimum is {_MIN_DIMENSION}x{_MIN_DIMENSION}"
             )
             logger.warning(
                 "image_validation_failed",
@@ -177,8 +176,7 @@ class ImagePipeline:
         # Maximum dimensions
         if width > _MAX_DIMENSION or height > _MAX_DIMENSION:
             msg = (
-                f"Image too large ({width}x{height}); "
-                f"maximum is {_MAX_DIMENSION}x{_MAX_DIMENSION}"
+                f"Image too large ({width}x{height}); maximum is {_MAX_DIMENSION}x{_MAX_DIMENSION}"
             )
             logger.warning(
                 "image_validation_failed",

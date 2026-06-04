@@ -36,9 +36,7 @@ class TestPreprocess:
         assert "http://" not in result
         assert "example.com" not in result
 
-    def test_preprocess_normalizes_whitespace(
-        self, text_pipeline: TextPipeline
-    ) -> None:
+    def test_preprocess_normalizes_whitespace(self, text_pipeline: TextPipeline) -> None:
         """Multiple consecutive whitespace characters should collapse to one space."""
         raw = "  hello   world\t\tfoo  "
         result = text_pipeline.preprocess(raw)

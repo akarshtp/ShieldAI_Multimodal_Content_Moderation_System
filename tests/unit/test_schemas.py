@@ -59,9 +59,7 @@ class TestBatchModerationRequest:
 
     def test_batch_request_too_many_items(self) -> None:
         """A batch with more than 100 items should raise a ValidationError."""
-        items = [
-            BatchItem(type="text", content=f"item-{i}") for i in range(101)
-        ]
+        items = [BatchItem(type="text", content=f"item-{i}") for i in range(101)]
         with pytest.raises(ValidationError):
             BatchModerationRequest(items=items)
 

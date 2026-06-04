@@ -196,9 +196,7 @@ class ResultStore:
         self._ensure_connected()
         assert self._connection is not None
 
-        cutoff = (
-            datetime.now(timezone.utc) - timedelta(hours=ttl_hours)
-        ).isoformat()
+        cutoff = (datetime.now(timezone.utc) - timedelta(hours=ttl_hours)).isoformat()
 
         cursor = await self._connection.execute(
             "DELETE FROM moderation_results WHERE created_at < ?",
@@ -221,6 +219,4 @@ class ResultStore:
     def _ensure_connected(self) -> None:
         """Raise if the store has not been initialised."""
         if self._connection is None:
-            raise RuntimeError(
-                "ResultStore is not initialised. Call initialize() first."
-            )
+            raise RuntimeError("ResultStore is not initialised. Call initialize() first.")
