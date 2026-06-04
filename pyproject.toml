@@ -102,6 +102,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+pythonpath = ["src"]
 markers = [
     "slow: marks tests that require model downloads (deselect with '-m \"not slow\"')",
     "integration: marks integration tests",
