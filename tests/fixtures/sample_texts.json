@@ -1,0 +1,52 @@
+[
+    {
+        "text": "This product is absolutely wonderful! Best purchase I've made all year.",
+        "expected_verdict": "approved",
+        "label": "positive_review"
+    },
+    {
+        "text": "Decent quality for the price. Nothing special but works fine.",
+        "expected_verdict": "approved",
+        "label": "neutral_review"
+    },
+    {
+        "text": "Terrible product. Broke after one day. Complete waste of money.",
+        "expected_verdict": "approved",
+        "label": "negative_review_not_toxic"
+    },
+    {
+        "text": "I hate this so much. The company is run by absolute idiots.",
+        "expected_verdict": "needs_review",
+        "label": "borderline_toxic"
+    },
+    {
+        "text": "",
+        "expected_verdict": "error",
+        "label": "empty_text"
+    },
+    {
+        "text": "a",
+        "expected_verdict": "error",
+        "label": "too_short"
+    },
+    {
+        "text": "Normal product review with <b>HTML tags</b> and a URL https://example.com/product",
+        "expected_verdict": "approved",
+        "label": "text_with_html_and_url"
+    },
+    {
+        "text": "   Lots   of    whitespace    everywhere   ",
+        "expected_verdict": "approved",
+        "label": "excessive_whitespace"
+    },
+    {
+        "text": "Ünïcödé chàracters in this rëvîew — works great™",
+        "expected_verdict": "approved",
+        "label": "unicode_text"
+    },
+    {
+        "text": "Buy now! Click here! Limited time offer! Free shipping! Act fast! Visit http://spam.example.com for details! Don't miss out! Only 5 left! Order today!",
+        "expected_verdict": "approved",
+        "label": "potential_spam"
+    }
+]
