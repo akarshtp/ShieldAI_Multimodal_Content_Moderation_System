@@ -61,6 +61,7 @@ jobs:
           python -m pytest tests/unit/ -v --cov=src/shieldai --cov-report=term-missing --cov-report=xml
         env:
           SHIELDAI_ENVIRONMENT: test
+          PYTHONPATH: src
 
       - name: Upload coverage report
         if: matrix.python-version == '3.11'
@@ -91,6 +92,7 @@ jobs:
           python -m pytest tests/integration/ -v -m "not slow"
         env:
           SHIELDAI_ENVIRONMENT: test
+          PYTHONPATH: src
 
   docker:
     name: Docker Build
