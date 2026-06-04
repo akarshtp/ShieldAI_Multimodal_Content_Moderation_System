@@ -6,7 +6,6 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-
 # ---------------------------------------------------------------------------
 # Request schemas
 # ---------------------------------------------------------------------------
@@ -103,7 +102,7 @@ class CategoryScoreResponse(BaseModel):
         ...,
         ge=0.0,
         le=1.0,
-        description="Model confidence for this category (0.0–1.0)",
+        description="Model confidence for this category (0.0-1.0)",
     )
 
 

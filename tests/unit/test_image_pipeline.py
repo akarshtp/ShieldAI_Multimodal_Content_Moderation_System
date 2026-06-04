@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import base64
 import io
-from unittest.mock import MagicMock
+from typing import TYPE_CHECKING
 
 import pytest
 from PIL import Image
@@ -12,6 +12,8 @@ from PIL import Image
 from shieldai.models import ModerationResult, ModerationVerdict
 from shieldai.pipeline.image_pipeline import ImagePipeline
 
+if TYPE_CHECKING:
+    from unittest.mock import MagicMock
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -70,7 +72,7 @@ class TestDecodeBase64:
 
     def test_decode_base64_invalid(self) -> None:
         """Invalid base64 data should raise ValueError."""
-        with pytest.raises(ValueError, match="[Ii]nvalid"):
+        with pytest.raises(ValueError, match=r"[Ii]nvalid"):
             ImagePipeline.decode_base64("not-valid-base64!!!")
 
 
@@ -83,7 +85,7 @@ class TestValidateImage:
     """Tests for ImagePipeline.validate_image()."""
 
     def test_validate_valid_image(self) -> None:
-        """A 100×100 RGB image should pass validation."""
+        """A 100x100 RGB image should pass validation."""
         raw = _make_test_image(100, 100)
         img = Image.open(io.BytesIO(raw))
         is_valid, msg = ImagePipeline.validate_image(img)
@@ -91,7 +93,7 @@ class TestValidateImage:
         assert msg == ""
 
     def test_validate_too_small(self) -> None:
-        """A 5×5 image should fail the minimum-dimension check."""
+        """A 5x5 image should fail the minimum-dimension check."""
         raw = _make_test_image(5, 5)
         img = Image.open(io.BytesIO(raw))
         is_valid, msg = ImagePipeline.validate_image(img)
@@ -99,7 +101,7 @@ class TestValidateImage:
         assert "small" in msg.lower()
 
     def test_validate_too_large(self) -> None:
-        """A 5000×5000 image should fail the maximum-dimension check."""
+        """A 5000x5000 image should fail the maximum-dimension check."""
         raw = _make_test_image(5000, 5000)
         img = Image.open(io.BytesIO(raw))
         is_valid, msg = ImagePipeline.validate_image(img)
@@ -128,7 +130,7 @@ class TestPreprocess:
 
         # Longest side should now be 1024
         assert max(processed.size) == 1024
-        # Aspect ratio should be preserved (2:1 → 1024×512)
+        # Aspect ratio should be preserved (2:1 -> 1024x512)
         assert processed.size == (1024, 512)
 
 
