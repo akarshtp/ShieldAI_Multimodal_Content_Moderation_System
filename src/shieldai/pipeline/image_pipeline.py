@@ -61,11 +61,11 @@ class ImagePipeline:
     @property
     def model_name(self) -> str:
         """Return the name of the underlying classifier model."""
-        return self._classifier.model_name
+        return str(self._classifier.model_name)
 
     def is_loaded(self) -> bool:
         """Return ``True`` if the underlying classifier model is loaded."""
-        return self._classifier.is_loaded()
+        return bool(self._classifier.is_loaded())
 
     # ── Loading helpers ──────────────────────────────────────────────────
 
@@ -226,7 +226,7 @@ class ImagePipeline:
             scale = _MAX_RESIZE_SIDE / longest
             new_width = int(width * scale)
             new_height = int(height * scale)
-            image = image.resize((new_width, new_height), Image.LANCZOS)
+            image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
             logger.debug(
                 "image_resized",
                 original_size=(width, height),

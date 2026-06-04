@@ -191,4 +191,4 @@ class ResultAggregator:
                 self._thresholds.spam,
                 self._thresholds.nsfw,
             )
-        return getattr(self._thresholds, attr_name)
+        return float(getattr(self._thresholds, attr_name))

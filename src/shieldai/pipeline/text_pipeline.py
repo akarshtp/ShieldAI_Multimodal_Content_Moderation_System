@@ -53,11 +53,11 @@ class TextPipeline:
     @property
     def model_name(self) -> str:
         """Return the name of the underlying classifier model."""
-        return self._classifier.model_name
+        return str(self._classifier.model_name)
 
     def is_loaded(self) -> bool:
         """Return ``True`` if the underlying classifier model is loaded."""
-        return self._classifier.is_loaded()
+        return bool(self._classifier.is_loaded())
 
     # ── Public API ───────────────────────────────────────────────────────
 
