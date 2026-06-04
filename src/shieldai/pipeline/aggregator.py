@@ -9,7 +9,6 @@ from __future__ import annotations
 import time
 from typing import TYPE_CHECKING
 
-from shieldai.config import ThresholdConfig
 from shieldai.logging_config import get_logger
 from shieldai.models import (
     AggregatedResult,
@@ -20,6 +19,7 @@ from shieldai.models import (
 )
 
 if TYPE_CHECKING:
+    from shieldai.config import ThresholdConfig
     pass
 
 logger = get_logger(__name__)

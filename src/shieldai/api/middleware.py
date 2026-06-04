@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import time
 import uuid
+from typing import TYPE_CHECKING
 
 import structlog
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
-from starlette.requests import Request
-from starlette.responses import Response
 
 from shieldai.logging_config import get_logger
+
+if TYPE_CHECKING:
+    from starlette.requests import Request
+    from starlette.responses import Response
 
 logger = get_logger(__name__)
 

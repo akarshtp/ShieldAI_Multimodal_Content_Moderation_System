@@ -143,7 +143,7 @@ _settings: Settings | None = None
 
 def get_settings() -> Settings:
     """Return the application settings singleton."""
-    global _settings  # noqa: PLW0603
+    global _settings
     if _settings is None:
         _settings = Settings()
     return _settings
@@ -151,5 +151,5 @@ def get_settings() -> Settings:
 
 def reset_settings() -> None:
     """Reset settings singleton (useful for testing)."""
-    global _settings  # noqa: PLW0603
+    global _settings
     _settings = None

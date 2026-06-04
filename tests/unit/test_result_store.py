@@ -4,13 +4,15 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
+from typing import TYPE_CHECKING
 from unittest.mock import patch
 
 import pytest
 
 from shieldai.storage.result_store import ResultStore
 
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -102,16 +104,16 @@ async def test_update_status(store: ResultStore) -> None:
 async def test_cleanup_old_results(store: ResultStore) -> None:
     """Results older than the TTL should be removed by cleanup."""
     # Insert a result with a very old created_at timestamp
-    assert store._connection is not None  # noqa: SLF001
+    assert store._connection is not None
     old_time = (datetime.now(timezone.utc) - timedelta(hours=48)).isoformat()
-    await store._connection.execute(  # noqa: SLF001
+    await store._connection.execute(
         """
         INSERT INTO moderation_results (id, status, input_type, result_json, created_at)
         VALUES (?, ?, ?, ?, ?)
         """,
         ("old-task", "completed", "text", "{}", old_time),
     )
-    await store._connection.commit()  # noqa: SLF001
+    await store._connection.commit()
 
     # Verify it exists
     row = await store.get_result("old-task")

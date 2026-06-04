@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import base64
 import io
+from typing import TYPE_CHECKING
 
 from PIL import Image
-from fastapi.testclient import TestClient
 
+if TYPE_CHECKING:
+    from fastapi.testclient import TestClient
 
 # ---------------------------------------------------------------------------
 # Helpers

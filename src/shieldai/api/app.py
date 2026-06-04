@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import time
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+from typing import TYPE_CHECKING
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,6 +22,9 @@ from shieldai.pipeline.image_pipeline import ImagePipeline
 from shieldai.pipeline.text_pipeline import TextPipeline
 from shieldai.queue.task_queue import AsyncTaskQueue
 from shieldai.storage.result_store import ResultStore
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncGenerator
 
 logger = get_logger(__name__)
 

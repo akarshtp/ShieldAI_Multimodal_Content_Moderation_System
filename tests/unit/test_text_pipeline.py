@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from unittest.mock import MagicMock
-
-import pytest
+from typing import TYPE_CHECKING
 
 from shieldai.models import ModerationResult, ModerationVerdict
-from shieldai.pipeline.text_pipeline import TextPipeline
 
+if TYPE_CHECKING:
+    from unittest.mock import MagicMock
+
+    from shieldai.pipeline.text_pipeline import TextPipeline
 
 # ---------------------------------------------------------------------------
 # Preprocessing tests

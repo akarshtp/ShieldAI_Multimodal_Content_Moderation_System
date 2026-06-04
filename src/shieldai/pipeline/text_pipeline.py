@@ -5,10 +5,13 @@ from __future__ import annotations
 import re
 import time
 import unicodedata
+from typing import TYPE_CHECKING
 
 from shieldai.logging_config import get_logger
 from shieldai.models import ModerationResult, ModerationVerdict
-from shieldai.models.text_classifier import TextClassifier
+
+if TYPE_CHECKING:
+    from shieldai.models.text_classifier import TextClassifier
 
 logger = get_logger(__name__)
 

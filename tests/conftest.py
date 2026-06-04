@@ -6,9 +6,9 @@ All fixtures use mocks so that tests run WITHOUT downloading ML models.
 from __future__ import annotations
 
 import time
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
 
 from shieldai.models import (
     CategoryScore,
@@ -16,7 +16,6 @@ from shieldai.models import (
     ModerationResult,
     ModerationVerdict,
 )
-
 
 # ---------------------------------------------------------------------------
 # Core result fixtures
@@ -147,11 +146,12 @@ def app(mock_text_classifier: MagicMock, mock_image_classifier: MagicMock):
     is needed.
     """
     from fastapi import FastAPI
+
     from shieldai.api.routes.health import router as health_router
     from shieldai.api.routes.moderation import router as moderation_router
     from shieldai.api.routes.results import router as results_router
-    from shieldai.pipeline.text_pipeline import TextPipeline
     from shieldai.pipeline.image_pipeline import ImagePipeline
+    from shieldai.pipeline.text_pipeline import TextPipeline
 
     test_app = FastAPI()
     test_app.include_router(health_router, prefix="/api/v1")

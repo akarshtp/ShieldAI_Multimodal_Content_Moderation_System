@@ -7,13 +7,18 @@ concurrent processing of moderation requests with configurable parallelism.
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import enum
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Callable
+from typing import TYPE_CHECKING, Any
 
 from shieldai.logging_config import get_logger
-from shieldai.models import ModerationResult
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from shieldai.models import ModerationResult
 
 logger = get_logger(__name__)
 
@@ -166,10 +171,8 @@ class AsyncTaskQueue:
 
         # Signal each worker to exit by injecting sentinel values.
         for _ in self._workers:
-            try:
+            with contextlib.suppress(asyncio.QueueFull):
                 self._queue.put_nowait("")
-            except asyncio.QueueFull:
-                pass
 
         # Wait for workers to finish their current work and exit.
         results = await asyncio.gather(*self._workers, return_exceptions=True)
@@ -254,7 +257,7 @@ class AsyncTaskQueue:
                     item_index=idx,
                     verdict=result.verdict.value if hasattr(result, "verdict") else None,
                 )
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 error_msg = f"Item {idx} failed: {exc}"
                 errors.append(error_msg)
                 logger.error(

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime, timezone
+from typing import TYPE_CHECKING
 
 from fastapi import APIRouter, HTTPException, Request
 
@@ -16,7 +17,9 @@ from shieldai.api.schemas import (
     TextModerationRequest,
 )
 from shieldai.logging_config import get_logger
-from shieldai.models import ModerationResult
+
+if TYPE_CHECKING:
+    from shieldai.models import ModerationResult
 
 logger = get_logger(__name__)
 

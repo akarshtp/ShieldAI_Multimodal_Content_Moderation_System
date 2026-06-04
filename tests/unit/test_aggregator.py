@@ -14,7 +14,6 @@ from shieldai.models import (
 )
 from shieldai.pipeline.aggregator import ResultAggregator
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------

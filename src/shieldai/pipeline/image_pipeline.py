@@ -5,12 +5,15 @@ from __future__ import annotations
 import base64
 import io
 import time
+from typing import TYPE_CHECKING
 
 from PIL import Image, UnidentifiedImageError
 
 from shieldai.logging_config import get_logger
 from shieldai.models import ModerationResult, ModerationVerdict
-from shieldai.models.image_classifier import ImageClassifier
+
+if TYPE_CHECKING:
+    from shieldai.models.image_classifier import ImageClassifier
 
 logger = get_logger(__name__)
 
