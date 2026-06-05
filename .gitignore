@@ -29,7 +29,7 @@ env/
 *.bin
 *.onnx
 *.safetensors
-models/
+/models/
 model_cache/
 .cache/
 
