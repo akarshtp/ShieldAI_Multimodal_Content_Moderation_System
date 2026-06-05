@@ -2,6 +2,7 @@
 
 All fixtures use mocks so that tests run WITHOUT downloading ML models.
 """
+# ruff: noqa: E402
 
 from __future__ import annotations
 
