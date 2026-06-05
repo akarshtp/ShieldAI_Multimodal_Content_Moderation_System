@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY src/ ./src/
 
 # Install the package itself
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir --no-deps --force-reinstall .
 
 
 # ── Runtime stage ──────────────────────────────────────────────────────────────
