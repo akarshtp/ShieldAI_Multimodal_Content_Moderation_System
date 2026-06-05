@@ -125,7 +125,7 @@ class Settings(BaseSettings):
 
     app_name: str = "ShieldAI"
     version: str = "1.0.0"
-    environment: Literal["development", "staging", "production"] = "development"
+    environment: Literal["development", "staging", "production", "test"] = "development"
     debug: bool = Field(default=False, description="Enable debug mode")
     log_level: str = Field(default="INFO", description="Logging level")
 
