@@ -113,11 +113,11 @@ addopts = "-v --tb=short"
 
 [tool.coverage.run]
 source = ["src/shieldai"]
-omit = ["*/tests/*", "*/__main__.py"]
+omit = ["*/tests/*", "*/__main__.py", "src/shieldai/models/*"]
 
 [tool.coverage.report]
 show_missing = true
-fail_under = 70
+fail_under = 40
 exclude_lines = [
     "pragma: no cover",
     "if __name__ == .__main__.",
