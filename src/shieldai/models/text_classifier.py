@@ -119,14 +119,10 @@ class TextClassifier(BaseClassifier):
             TypeError: If *input_data* is not a string.
         """
         if not self.is_loaded():
-            raise RuntimeError(
-                "TextClassifier model is not loaded. Call load_model() first."
-            )
+            raise RuntimeError("TextClassifier model is not loaded. Call load_model() first.")
 
         if not isinstance(input_data, str):
-            raise TypeError(
-                f"TextClassifier expects a str, got {type(input_data).__name__}"
-            )
+            raise TypeError(f"TextClassifier expects a str, got {type(input_data).__name__}")
 
         text: str = input_data
         settings = get_settings()
@@ -177,10 +173,10 @@ class TextClassifier(BaseClassifier):
         The six sigmoid probabilities from toxic-bert are collapsed into
         project-level categories by keeping the maximum confidence when
         multiple labels map to the same :class:`ContentCategory`.  A
-        synthetic ``SAFE`` score is computed as ``1 − max(unsafe scores)``.
+        synthetic ``SAFE`` score is computed as ``1 - max(unsafe scores)``.
         """
-        assert self._tokenizer is not None  # noqa: S101
-        assert self._model is not None  # noqa: S101
+        assert self._tokenizer is not None
+        assert self._model is not None
 
         settings = get_settings()
         encoding = self._tokenizer(
@@ -222,9 +218,9 @@ class TextClassifier(BaseClassifier):
 
         Decision logic (evaluated in order):
 
-        1. **REJECTED** – any unsafe category score ≥ its rejection threshold.
-        2. **NEEDS_REVIEW** – any unsafe category score ≥ the review threshold.
-        3. **APPROVED** – otherwise.
+        1. **REJECTED** - any unsafe category score ≥ its rejection threshold.
+        2. **NEEDS_REVIEW** - any unsafe category score ≥ the review threshold.
+        3. **APPROVED** - otherwise.
         """
         thresholds = settings.thresholds
         category_threshold_map: dict[ContentCategory, float] = {
@@ -237,9 +233,7 @@ class TextClassifier(BaseClassifier):
         for score in scores:
             if score.category == ContentCategory.SAFE:
                 continue
-            reject_threshold = category_threshold_map.get(
-                score.category, thresholds.toxic
-            )
+            reject_threshold = category_threshold_map.get(score.category, thresholds.toxic)
             if score.confidence >= reject_threshold:
                 return ModerationVerdict.REJECTED
 

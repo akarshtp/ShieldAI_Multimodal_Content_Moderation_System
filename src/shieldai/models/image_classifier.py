@@ -112,14 +112,11 @@ class ImageClassifier(BaseClassifier):
             TypeError: If *input_data* is not a PIL Image.
         """
         if not self.is_loaded():
-            raise RuntimeError(
-                "ImageClassifier model is not loaded. Call load_model() first."
-            )
+            raise RuntimeError("ImageClassifier model is not loaded. Call load_model() first.")
 
         if not isinstance(input_data, Image.Image):
             raise TypeError(
-                f"ImageClassifier expects a PIL.Image.Image, "
-                f"got {type(input_data).__name__}"
+                f"ImageClassifier expects a PIL.Image.Image, got {type(input_data).__name__}"
             )
 
         image: Image.Image = self._prepare_image(input_data)
@@ -201,8 +198,8 @@ class ImageClassifier(BaseClassifier):
         Cosine similarities are normalised via softmax to produce a valid
         probability distribution over the prompt categories.
         """
-        assert self._processor is not None  # noqa: S101
-        assert self._model is not None  # noqa: S101
+        assert self._processor is not None
+        assert self._model is not None
 
         inputs = self._processor(
             text=self._prompt_texts,
@@ -236,9 +233,9 @@ class ImageClassifier(BaseClassifier):
 
         Decision logic (evaluated in order):
 
-        1. **REJECTED** – any unsafe category score ≥ its rejection threshold.
-        2. **NEEDS_REVIEW** – any unsafe category score ≥ the review threshold.
-        3. **APPROVED** – otherwise.
+        1. **REJECTED** - any unsafe category score ≥ its rejection threshold.
+        2. **NEEDS_REVIEW** - any unsafe category score ≥ the review threshold.
+        3. **APPROVED** - otherwise.
         """
         thresholds = settings.thresholds
         category_threshold_map: dict[ContentCategory, float] = {
@@ -250,9 +247,7 @@ class ImageClassifier(BaseClassifier):
         for score in scores:
             if score.category == ContentCategory.SAFE:
                 continue
-            reject_threshold = category_threshold_map.get(
-                score.category, thresholds.toxic
-            )
+            reject_threshold = category_threshold_map.get(score.category, thresholds.toxic)
             if score.confidence >= reject_threshold:
                 return ModerationVerdict.REJECTED
 
