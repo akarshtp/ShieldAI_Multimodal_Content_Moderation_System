@@ -22,8 +22,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy source code
 COPY src/ ./src/
 
-# Install the package itself
-RUN pip install --no-cache-dir --no-deps --force-reinstall .
+# Install the package itself (clean build artifacts first to prevent setuptools caching)
+RUN rm -rf build/ *.egg-info src/*.egg-info && \
+    pip install --no-cache-dir --no-deps --force-reinstall .
 
 
 # ── Runtime stage ──────────────────────────────────────────────────────────────
