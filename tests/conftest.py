@@ -10,9 +10,12 @@ import sys
 from pathlib import Path
 
 # Add the 'src' directory to the python path to ensure imports work in all environments
-src_path = str(Path(__file__).parent.parent / "src")
+src_path = str(Path(__file__).resolve().parent.parent / "src")
+print(f"DEBUG: sys.path before: {sys.path}")
+print(f"DEBUG: resolved src_path: {src_path}")
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
+print(f"DEBUG: sys.path after: {sys.path}")
 
 import time
 from unittest.mock import AsyncMock, MagicMock
