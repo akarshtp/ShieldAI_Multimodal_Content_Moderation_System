@@ -9,7 +9,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy dependency specification first for layer caching
-COPY pyproject.toml ./
+COPY pyproject.toml README.md ./
+RUN mkdir -p src/shieldai && touch src/shieldai/__init__.py
 
 # Install dependencies into a virtual environment
 RUN python -m venv /opt/venv
