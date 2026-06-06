@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/akarshtp/shieldai/actions/workflows/ci.yml">
-    <img src="https://github.com/akarshtp/shieldai/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+  <a href="https://github.com/akarshtp/ShieldAI_Multimodal_Content_Moderation_System/actions/workflows/ci.yml">
+    <img src="https://github.com/akarshtp/ShieldAI_Multimodal_Content_Moderation_System/actions/workflows/ci.yml/badge.svg" alt="CI Status">
   </a>
   <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License: MIT">
@@ -91,8 +91,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/akarshtp/shieldai.git
-cd shieldai
+git clone https://github.com/akarshtp/ShieldAI_Multimodal_Content_Moderation_System.git
+cd ShieldAI_Multimodal_Content_Moderation_System
 
 # Install with development dependencies
 pip install -e ".[dev]"

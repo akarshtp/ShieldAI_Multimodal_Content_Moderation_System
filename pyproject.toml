@@ -49,9 +49,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/akarshtp/shieldai"
-Repository = "https://github.com/akarshtp/shieldai"
-Issues = "https://github.com/akarshtp/shieldai/issues"
+Homepage = "https://github.com/akarshtp/ShieldAI_Multimodal_Content_Moderation_System"
+Repository = "https://github.com/akarshtp/ShieldAI_Multimodal_Content_Moderation_System"
+Issues = "https://github.com/akarshtp/ShieldAI_Multimodal_Content_Moderation_System/issues"
 
 [project.scripts]
 shieldai = "shieldai.__main__:main"
